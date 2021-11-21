@@ -1,5 +1,6 @@
 import { Component } from "react";
 import ReadString from "./ReadString";
+import SetString from "./SetString";
 import "./App.css";
 
 export default class App extends Component {
@@ -29,6 +30,10 @@ export default class App extends Component {
     return (
       <div className="App">
         <ReadString
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+        />
+        <SetString
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />
