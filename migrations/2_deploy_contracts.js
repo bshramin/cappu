@@ -1,5 +1,5 @@
-const MyStringStore = artifacts.require("MyStringStore");
+const Cappu = artifacts.require("Cappu");
 
 module.exports = function (deployer) {
-  deployer.deploy(MyStringStore);
+  deployer.deploy(Cappu);
 };

@@ -12,7 +12,7 @@ class SetString extends React.Component {
 
   setValue = (value) => {
     const { drizzle, drizzleState } = this.props;
-    const contract = drizzle.contracts.MyStringStore;
+    const contract = drizzle.contracts.Cappu;
 
     // let drizzle know we want to call the `set` method with `value`
     const stackId = contract.methods["set"].cacheSend(value, {

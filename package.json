@@ -1,0 +1,25 @@
+{
+  "name": "cappu",
+  "version": "1.0.0",
+  "description": "➜  node version v16.13.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bshramin/cappu.git"
+  },
+  "author": "Amin Bashiri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bshramin/cappu/issues"
+  },
+  "homepage": "https://github.com/bshramin/cappu#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.3"
+  }
+}
