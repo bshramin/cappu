@@ -1,6 +1,7 @@
 import { Component } from "react";
 import ReadString from "./ReadString";
 import SetString from "./SetString";
+import MintToken from "./MintToken";
 import "./App.css";
 
 export default class App extends Component {
@@ -34,6 +35,10 @@ export default class App extends Component {
           drizzleState={this.state.drizzleState}
         />
         <SetString
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+        />
+        <MintToken
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />

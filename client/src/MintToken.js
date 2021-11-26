@@ -1,6 +1,6 @@
 import React from "react";
 
-class SetString extends React.Component {
+export default class MintToken extends React.Component {
   state = { stackId: null };
 
   handleKeyDown = (e) => {
@@ -14,10 +14,22 @@ class SetString extends React.Component {
     const { drizzle, drizzleState } = this.props;
     const contract = drizzle.contracts.Cappu;
 
+    var data = { name: value };
+    var str_data = JSON.stringify(data);
+    var bytes = []; // char codes
+
+    for (var i = 0; i < str_data.length; ++i) {
+      var code = str_data.charCodeAt(i);
+      bytes = bytes.concat([code]);
+    }
     // let drizzle know we want to call the `set` method with `value`
-    const stackId = contract.methods["set"].cacheSend(value, {
-      from: drizzleState.accounts[0],
-    });
+    const stackId = contract.methods["mint"].cacheSend(
+      drizzleState.accounts[0],
+      bytes,
+      {
+        from: drizzleState.accounts[0],
+      }
+    );
 
     // save the `stackId` for later reference
     this.setState({ stackId });
@@ -42,12 +54,10 @@ class SetString extends React.Component {
   render() {
     return (
       <div>
-        <div>SetString:</div>
+        <div>MintToken:</div>
         <input type="text" onKeyDown={this.handleKeyDown} />
         <div>{this.getTxStatus()}</div>
       </div>
     );
   }
 }
-
-export default SetString;
