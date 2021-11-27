@@ -11,8 +11,9 @@ contract Cappu is ERC721 {
         myString = x;
     }
 
-    function mint(address to, bytes memory data) public virtual {
-        uint256 tokenId = uint256(keccak256(data));
-        _safeMint(to, tokenId, data);
+    function mint(address to, string memory data) public virtual {
+        bytes memory dataBytes = bytes(data);
+        uint256 tokenId = uint256(keccak256(dataBytes));
+        _safeMint(to, tokenId, dataBytes);
     }
 }
