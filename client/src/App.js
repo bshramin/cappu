@@ -1,7 +1,8 @@
 import { Component } from "react";
-import ReadString from "./ReadString";
-import SetString from "./SetString";
-import MintToken from "./MintToken";
+import About from "./components/About";
+import NotFound from "./components/NotFound";
+import HomePage from "./components/HomePage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 export default class App extends Component {
@@ -29,20 +30,21 @@ export default class App extends Component {
   render() {
     if (this.state.loading) return "Loading Drizzle...";
     return (
-      <div className="App">
-        <ReadString
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
-        <SetString
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
-        <MintToken
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                drizzle={this.props.drizzle}
+                drizzleState={this.state.drizzleState}
+              />
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
