@@ -16,20 +16,11 @@ export default class MintToken extends React.Component {
 
     var data = { name: value };
     var str_data = JSON.stringify(data);
-    var bytes = []; // char codes
 
-    for (var i = 0; i < str_data.length; ++i) {
-      var code = str_data.charCodeAt(i);
-      bytes = bytes.concat([code]);
-    }
     // let drizzle know we want to call the `set` method with `value`
-    const stackId = contract.methods["mint"].cacheSend(
-      drizzleState.accounts[0],
-      bytes,
-      {
-        from: drizzleState.accounts[0],
-      }
-    );
+    const stackId = contract.methods["mint"].cacheSend(str_data, {
+      from: drizzleState.accounts[0],
+    });
 
     // save the `stackId` for later reference
     this.setState({ stackId });
