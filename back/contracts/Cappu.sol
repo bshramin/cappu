@@ -3,14 +3,18 @@ pragma solidity >=0.4.22 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Cappu is ERC721 {
-    string[] public datas;
+    string[] private datas;
     mapping(string => bool) _tokenExists; // should calculate hash instead
 
     constructor() ERC721("Cappu", "CAPU") {}
 
-    string public myString = "Hello World";
+    string private myString = "Hello World";
 
-    function set(string memory x) public {
+    function getString() public view returns (string memory) {
+        return myString;
+    }
+
+    function setString(string memory x) public {
         myString = x;
     }
 
