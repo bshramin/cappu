@@ -7,6 +7,7 @@ import Invoices from "./containers/Invoices";
 import HomePage from "./containers/HomePage";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
+import Profile from "./containers/Profile";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="expenses" element={<Expenses />} />
         <Route path="invoices" element={<Invoices />} />
         <Route path="string" element={<TheString />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </div>
     <Footer />

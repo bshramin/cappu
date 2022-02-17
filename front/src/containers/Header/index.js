@@ -1,5 +1,6 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Web3 from "web3";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,7 +13,10 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
+import {
+  retrieveWalletAddress,
+  isWalletConnected,
+} from "../../helpers/connect";
 import "./style.css";
 
 const pages = [
@@ -20,11 +24,22 @@ const pages = [
   { title: "Invoices", url: "/invoices" },
   { title: "Expenses", url: "/expenses" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  { title: "Connect Wallet", login: false },
+  { title: "Profile", login: true },
+  { title: "Disconnect Wallet", login: true },
+];
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [account, setAccount] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  useEffect(() => {
+    setAccount(retrieveWalletAddress());
+    setIsLoggedIn(isWalletConnected());
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -142,11 +157,13 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {settings.map((setting) =>
+                setting.login === isLoggedIn ? (
+                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.title}</Typography>
+                  </MenuItem>
+                ) : null
+              )}
             </Menu>
           </Box>
         </Toolbar>
