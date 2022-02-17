@@ -1,0 +1,20 @@
+a {
+text-decoration: none;
+color: white;
+}
+
+p {
+  color: black;
+}
+
+.header-nav-item {
+  margin-right: 20px;
+}
+
+.header-nav-link-mobile {
+  color:black;
+}
+
+.header-nav-link-desktop {
+  color:white;
+}
