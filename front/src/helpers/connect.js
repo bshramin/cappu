@@ -17,3 +17,7 @@ export const isWalletConnected = () => {
   const walletAddress = window.sessionStorage.getItem("account");
   return walletAddress ? true : false;
 };
+
+export const disconnectWallet = () => {
+  window.sessionStorage.removeItem("account");
+};

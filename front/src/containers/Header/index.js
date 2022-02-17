@@ -14,27 +14,49 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import {
+  connectWallet,
   retrieveWalletAddress,
   isWalletConnected,
+  disconnectWallet,
 } from "../../helpers/connect";
 import "./style.css";
-
-const pages = [
-  { title: "TheString", url: "/string" },
-  { title: "Invoices", url: "/invoices" },
-  { title: "Expenses", url: "/expenses" },
-];
-const settings = [
-  { title: "Connect Wallet", login: false },
-  { title: "Profile", login: true },
-  { title: "Disconnect Wallet", login: true },
-];
 
 const Header = () => {
   const [account, setAccount] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const pages = [
+    { title: "TheString", url: "/string" },
+    { title: "Invoices", url: "/invoices" },
+    { title: "Expenses", url: "/expenses" },
+  ];
+
+  const settings = [
+    {
+      title: retrieveWalletAddress(),
+      login: true,
+    },
+    {
+      title: "Connect Wallet",
+      login: false,
+      onClick: () => {
+        connectWallet().then(() => {
+          setIsLoggedIn(isWalletConnected());
+        });
+      },
+    },
+    { title: "Profile", login: true },
+    {
+      title: "Disconnect Wallet",
+      login: true,
+      onClick: () => {
+        disconnectWallet();
+        setIsLoggedIn(false);
+      },
+    },
+  ];
 
   useEffect(() => {
     setAccount(retrieveWalletAddress());
@@ -159,7 +181,7 @@ const Header = () => {
             >
               {settings.map((setting) =>
                 setting.login === isLoggedIn ? (
-                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting.title} onClick={setting.onClick}>
                     <Typography textAlign="center">{setting.title}</Typography>
                   </MenuItem>
                 ) : null

@@ -31,14 +31,16 @@ function TheString() {
   };
 
   var submitNewString = async () => {
-    await contract.methods.setString(newString).send({ from: account });
-
-    loadString();
+    contract.methods
+      .setString(newString)
+      .send({ from: account })
+      .then(() => {
+        loadString();
+      });
   };
 
   return (
     <div>
-      Your account is: {account}
       <h1>The String</h1>
       <ul>{theString}</ul>
       <input
