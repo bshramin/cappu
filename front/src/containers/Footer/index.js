@@ -11,7 +11,7 @@ const Footer = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography className="footer-copyright">
-            Copyright © 2022. All rights reserved.
+            Cappu, The NFT Platform.
           </Typography>
         </Toolbar>
       </Container>
