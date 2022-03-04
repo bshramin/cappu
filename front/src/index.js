@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TheString from "./containers/TheString";
 import Expenses from "./containers/Expenses";
-import Invoices from "./containers/Invoices";
+import Mint from "./containers/Mint";
 import HomePage from "./containers/HomePage";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
@@ -21,7 +21,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="expenses" element={<Expenses />} />
-        <Route path="invoices" element={<Invoices />} />
+        <Route path="mint" element={<Mint />} />
         <Route path="string" element={<TheString />} />
         <Route path="profile" element={<Profile />} />
       </Routes>

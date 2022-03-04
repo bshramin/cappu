@@ -1,6 +1,6 @@
 export const NETWORK = "http://localhost:7545";
 
-export const CONTACT_ADDRESS = "0x586786a7B125d60b909D63b91cAe5589685D3C91";
+export const CONTACT_ADDRESS = "0xa3627e9D961857DCa0FB4EaAa492AA3ae09C8D2D";
 
 export const CONTACT_ABI = [
   {

@@ -6,11 +6,10 @@ import { retrieveWalletAddress } from "../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
 import "./style.css";
 
-function TheString() {
+function Mint() {
   const [account, setAccount] = useState();
   const [contract, setContract] = useState();
-  const [theString, setTheString] = useState();
-  const [newString, setNewString] = useState();
+  const [data, setData] = useState();
 
   useEffect(() => {
     const load = async () => {
@@ -19,47 +18,29 @@ function TheString() {
       const web3 = new Web3(Web3.givenProvider || NETWORK);
       const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
       setContract(cappuContract);
-
-      const theString = await cappuContract.methods.getString().call();
-      setTheString(theString);
     };
 
     load();
   }, []);
 
-  var loadString = async () => {
-    const theString = await contract.methods.getString().call();
-    setTheString(theString);
-  };
-
-  var submitNewString = async () => {
+  var mintToken = async () => {
     contract.methods
-      .setString(newString)
+      .mint(data)
       .send({ from: account })
       .then(() => {
-        loadString();
+        console.log("Minted");
       });
   };
 
   return (
-    <div className="the-string-container">
-      <span>The String</span>
-      <span>{theString}</span>
-      <Input
-        multiline
-        onChange={(e) => {
-          setNewString(e.target.value);
-        }}
-      />
-      <Button
-        variant="contained"
-        className="submit-btn"
-        onClick={submitNewString}
-      >
-        Submit
+    <div className="mint-container">
+      <div>Your account is: {account}</div>
+      <Input multiline minRows="4" onChange={(e) => setData(e.target.value)} />
+      <Button variant="contained" className="submit-btn" onClick={mintToken}>
+        Mint
       </Button>
     </div>
   );
 }
 
-export default TheString;
+export default Mint;

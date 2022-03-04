@@ -29,7 +29,7 @@ const Header = () => {
 
   const pages = [
     { title: "TheString", url: "/string" },
-    { title: "Invoices", url: "/invoices" },
+    { title: "Mint", url: "/mint" },
     { title: "Expenses", url: "/expenses" },
   ];
 
