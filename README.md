@@ -1,1 +1,3 @@
 # Cappu
+
+The NFT Platform.
