@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TheString from "./containers/TheString";
-import Expenses from "./containers/Expenses";
+import MyTokens from "./containers/MyTokens";
 import Mint from "./containers/Mint";
 import HomePage from "./containers/HomePage";
 import Header from "./containers/Header";
@@ -20,7 +20,7 @@ ReactDOM.render(
     <div className="main-section">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="expenses" element={<Expenses />} />
+        <Route path="my-tokens" element={<MyTokens />} />
         <Route path="mint" element={<Mint />} />
         <Route path="string" element={<TheString />} />
         <Route path="profile" element={<Profile />} />

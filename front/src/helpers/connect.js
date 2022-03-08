@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../config";
+import { NETWORK } from "../config";
 
 export const connectWallet = async () => {
   console.log("Connecting to Wallet...");

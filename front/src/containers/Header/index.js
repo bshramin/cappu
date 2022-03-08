@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Web3 from "web3";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -22,7 +21,6 @@ import {
 import "./style.css";
 
 const Header = () => {
-  const [account, setAccount] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -30,7 +28,7 @@ const Header = () => {
   const pages = [
     { title: "TheString", url: "/string" },
     { title: "Mint", url: "/mint" },
-    { title: "Expenses", url: "/expenses" },
+    { title: "My Tokens", url: "/my-tokens" },
   ];
 
   const settings = [
@@ -59,7 +57,6 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    setAccount(retrieveWalletAddress());
     setIsLoggedIn(isWalletConnected());
   }, []);
 
