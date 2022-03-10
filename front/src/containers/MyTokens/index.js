@@ -7,6 +7,8 @@ import "./style.css";
 export default function MyTokens() {
   const [account, setAccount] = useState();
   const [balance, setBalance] = useState();
+  const [tokensId, setTokensId] = useState();
+  const [tokensData, setTokensData] = useState();
 
   useEffect(() => {
     const load = async () => {
@@ -17,22 +19,38 @@ export default function MyTokens() {
           CONTACT_ABI,
           CONTACT_ADDRESS
         );
+
         const balance = await cappuContract.methods.balanceOf(account).call();
+        const output = await cappuContract.methods
+          .getUserTokens(account)
+          .call();
+
+        const id = output[0];
+        const data = output[1];
 
         setBalance(balance);
         setAccount(account);
+        setTokensId(id);
+        setTokensData(data);
       }
     };
 
     load();
   }, []);
 
-  console.log(account, balance);
   return account ? (
     <div className="my-tokens-container">
       <span>My Tokens</span>
       <span>{account}</span>
       <span>{balance}</span>
+      {tokensId && tokensData
+        ? tokensId.map((id, index) => (
+            <div key={index}>
+              <div className="token-id">{id}</div>
+              <div className="token-data">{tokensData[index]}</div>
+            </div>
+          ))
+        : null}
     </div>
   ) : (
     <div className="my-tokens-container">

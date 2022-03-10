@@ -41,7 +41,7 @@ function TheString() {
       });
   };
 
-  return (
+  return account ? (
     <div className="the-string-container">
       <span>The String</span>
       <span>{theString}</span>
@@ -58,6 +58,10 @@ function TheString() {
       >
         Submit
       </Button>
+    </div>
+  ) : (
+    <div className="my-tokens-container">
+      <span>Conect your wallet.</span>
     </div>
   );
 }

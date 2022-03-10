@@ -1,12 +1,8 @@
-.the-string-container {
+.my-tokens-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-}
-
-.submit-btn {
-  margin-top: 20px !important;
 }

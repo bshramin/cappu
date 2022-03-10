@@ -4,7 +4,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Cappu is ERC721 {
     string private myString = "Hello World";
-    mapping(uint256 => string) datas;
+    mapping(uint256 => string) tokenDatas;
+    mapping(address => uint256[]) ownerTokens;
 
     constructor() ERC721("Cappu", "CAPU") {}
 
@@ -19,6 +20,20 @@ contract Cappu is ERC721 {
     function mint(string memory data) public {
         uint256 theHash = uint256(keccak256(abi.encode(data)));
         _mint(msg.sender, theHash);
-        datas[theHash] = data;
+        tokenDatas[theHash] = data;
+        ownerTokens[msg.sender].push(theHash);
+    }
+
+    function getUserTokens(address user)
+        public
+        view
+        returns (uint256[] memory, string[] memory)
+    {
+        uint256[] memory tokens = ownerTokens[user];
+        string[] memory datas = new string[](tokens.length);
+        for (uint256 i = 0; i < tokens.length; i++) {
+            datas[i] = tokenDatas[tokens[i]];
+        }
+        return (tokens, datas);
     }
 }
