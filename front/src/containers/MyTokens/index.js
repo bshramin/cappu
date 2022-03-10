@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
+import Button from "@mui/material/Button";
+import TokenTransfer from "./TokenTransfer";
 import { retrieveWalletAddress } from "../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
 import "./style.css";
@@ -9,6 +11,7 @@ export default function MyTokens() {
   const [balance, setBalance] = useState();
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
+  const [tokenIdToTransfer, setTokenIdToTransfer] = useState();
 
   useEffect(() => {
     const load = async () => {
@@ -45,9 +48,23 @@ export default function MyTokens() {
       <span>{balance}</span>
       {tokensId && tokensData
         ? tokensId.map((id, index) => (
-            <div key={index}>
+            <div className="token-container" key={index}>
               <div className="token-id">{id}</div>
               <div className="token-data">{tokensData[index]}</div>
+              <Button
+                onClick={() => {
+                  if (tokenIdToTransfer == id) {
+                    setTokenIdToTransfer(null);
+                  } else {
+                    setTokenIdToTransfer(id);
+                  }
+                }}
+              >
+                Transfer
+              </Button>
+              {tokenIdToTransfer && tokenIdToTransfer == id ? (
+                <TokenTransfer tokenId={id} />
+              ) : null}
             </div>
           ))
         : null}

@@ -1,7 +1,7 @@
 function HomePage() {
   return (
     <div>
-      <h1>This is HomePage</h1>
+      <h1>This is Cappu</h1>
     </div>
   );
 }
