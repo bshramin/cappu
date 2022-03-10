@@ -44,7 +44,6 @@ export default function MyTokens() {
   return account ? (
     <div className="my-tokens-container">
       <span>My Tokens</span>
-      <span>{account}</span>
       <span>{balance}</span>
       {tokensId && tokensData
         ? tokensId.map((id, index) => (
@@ -53,7 +52,7 @@ export default function MyTokens() {
               <div className="token-data">{tokensData[index]}</div>
               <Button
                 onClick={() => {
-                  if (tokenIdToTransfer == id) {
+                  if (tokenIdToTransfer === id) {
                     setTokenIdToTransfer(null);
                   } else {
                     setTokenIdToTransfer(id);
@@ -62,7 +61,7 @@ export default function MyTokens() {
               >
                 Transfer
               </Button>
-              {tokenIdToTransfer && tokenIdToTransfer == id ? (
+              {tokenIdToTransfer && tokenIdToTransfer === id ? (
                 <TokenTransfer tokenId={id} />
               ) : null}
             </div>

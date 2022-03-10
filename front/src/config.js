@@ -1,6 +1,6 @@
 export const NETWORK = "http://localhost:7545"; // Change this to your network address
 
-export const CONTACT_ADDRESS = "0xAed7Cb6E7dCfF245FD917e820B3204f078AE1c2e"; // Change this to the new address of the contract
+export const CONTACT_ADDRESS = "0x63DE61059e0558D415519004cf4c41E104122d5C"; // Change this to the new address of the contract
 
 export const CONTACT_ABI = [
   {
@@ -410,5 +410,28 @@ export const CONTACT_ABI = [
     stateMutability: "view",
     type: "function",
     constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "safeSendToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

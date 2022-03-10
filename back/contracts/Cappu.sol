@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./Helper.sol";
 
-contract Cappu is ERC721 {
+contract Cappu is ERC721, Helper {
     string private myString = "Hello World";
     mapping(uint256 => string) tokenDatas;
     mapping(address => uint256[]) ownerTokens;
@@ -35,5 +36,15 @@ contract Cappu is ERC721 {
             datas[i] = tokenDatas[tokens[i]];
         }
         return (tokens, datas);
+    }
+
+    function safeSendToken(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public {
+        safeTransferFrom(from, to, tokenId);
+        ownerTokens[from] = removeItemFromArray(tokenId, ownerTokens[from]);
+        ownerTokens[to].push(tokenId);
     }
 }
