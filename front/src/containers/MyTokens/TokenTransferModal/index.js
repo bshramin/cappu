@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Web3 from "web3";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
-import Typography from "@mui/material/Typography";
 import Modal from "../../../components/Modal";
 import { retrieveWalletAddress } from "../../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../../config";

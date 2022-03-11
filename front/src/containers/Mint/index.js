@@ -37,15 +37,19 @@ function Mint() {
 
   return account ? (
     <div className="mint-container">
-      <div>Your account is: {account}</div>
-      <Input multiline minRows="4" onChange={(e) => setData(e.target.value)} />
+      <Input
+        placeholder="Insert token data here..."
+        multiline
+        minRows="4"
+        onChange={(e) => setData(e.target.value)}
+      />
       <Button variant="contained" className="submit-btn" onClick={mintToken}>
         Mint
       </Button>
     </div>
   ) : (
     <div className="mint-container">
-      <div>Connect your wallet.</div>
+      <div>Connect your wallet</div>
     </div>
   );
 }

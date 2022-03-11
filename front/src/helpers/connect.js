@@ -6,6 +6,7 @@ export const connectWallet = async () => {
   const web3 = new Web3(Web3.givenProvider || NETWORK);
   const accounts = await web3.eth.requestAccounts();
   window.sessionStorage.setItem("account", accounts[0]);
+  window.location.reload();
 };
 
 export const retrieveWalletAddress = () => {
@@ -20,4 +21,5 @@ export const isWalletConnected = () => {
 
 export const disconnectWallet = () => {
   window.sessionStorage.removeItem("account");
+  window.location.reload();
 };

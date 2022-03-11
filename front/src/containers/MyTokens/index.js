@@ -16,7 +16,6 @@ import "./style.css";
 
 export default function MyTokens() {
   const [account, setAccount] = useState();
-  const [balance, setBalance] = useState();
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
   const [tokenIdToTransfer, setTokenIdToTransfer] = useState(null);
@@ -32,7 +31,6 @@ export default function MyTokens() {
           CONTACT_ADDRESS
         );
 
-        const balance = await cappuContract.methods.balanceOf(account).call();
         const output = await cappuContract.methods
           .getUserTokens(account)
           .call();
@@ -40,7 +38,6 @@ export default function MyTokens() {
         const id = output[0];
         const data = output[1];
 
-        setBalance(balance);
         setAccount(account);
         setTokensId(id);
         setTokensData(data);
@@ -50,54 +47,63 @@ export default function MyTokens() {
     load();
   }, []);
 
-  return account ? (
+  return (
     <div className="my-tokens-container">
-      <span>My Tokens</span>
-      <span>Count: {balance}</span>
-      {tokensId && tokensData ? (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Token ID</TableCell>
-                <TableCell align="center">Token Data</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tokensId.map((id, index) => {
-                let idString = id.toString();
-                return (
-                  <TableRow
-                    key={id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {idString.substring(0, 5) +
-                        "..." +
-                        idString.substring(idString.length - 5)}
-                    </TableCell>
-                    <TableCell align="center">{tokensData[index]}</TableCell>
-                    <TableCell align="center">
-                      <Button
-                        onClick={() => {
-                          if (tokenIdToTransfer === id) {
-                            setTokenIdToTransfer(null);
-                          } else {
-                            setTokenIdToTransfer(id);
-                          }
-                        }}
-                      >
-                        Transfer
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : null}
+      {(() => {
+        if (!account) {
+          return <span>Connect your wallet</span>;
+        }
+        if (!tokensId || !tokensData) {
+          return <span>Failed to load tokens</span>;
+        }
+        if (tokensId.length === 0 || tokensData === 0) {
+          return <span>You have no tokens yet</span>;
+        }
+        return (
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Token ID</TableCell>
+                  <TableCell align="center">Token Data</TableCell>
+                  <TableCell align="center">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tokensId.map((id, index) => {
+                  let idString = id.toString();
+                  return (
+                    <TableRow
+                      key={id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {idString.substring(0, 5) +
+                          "..." +
+                          idString.substring(idString.length - 5)}
+                      </TableCell>
+                      <TableCell align="center">{tokensData[index]}</TableCell>
+                      <TableCell align="center">
+                        <Button
+                          onClick={() => {
+                            if (tokenIdToTransfer === id) {
+                              setTokenIdToTransfer(null);
+                            } else {
+                              setTokenIdToTransfer(id);
+                            }
+                          }}
+                        >
+                          Transfer
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        );
+      })()}
 
       <TokenTransferModal
         show={!!tokenIdToTransfer}
@@ -114,10 +120,6 @@ export default function MyTokens() {
         }}
         result={transferResult}
       />
-    </div>
-  ) : (
-    <div className="my-tokens-container">
-      <span>Conect your wallet.</span>
     </div>
   );
 }

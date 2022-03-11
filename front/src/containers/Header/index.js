@@ -26,9 +26,8 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const pages = [
-    { title: "TheString", url: "/string" },
-    { title: "Mint", url: "/mint" },
-    { title: "My Tokens", url: "/my-tokens" },
+    { title: "Mint", url: "/mint", noLogin: false },
+    { title: "My Tokens", url: "/my-tokens", noLogin: false },
   ];
 
   const settings = [
@@ -45,7 +44,6 @@ const Header = () => {
         });
       },
     },
-    { title: "Profile", login: true },
     {
       title: "Disconnect Wallet",
       login: true,
@@ -117,18 +115,20 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Link to={page.url}>
-                    <Typography
-                      textAlign="center"
-                      className="header-nav-link-mobile"
-                    >
-                      {page.title}
-                    </Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              {pages.map((page) =>
+                page.noLogin || isLoggedIn ? (
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <Link to={page.url}>
+                      <Typography
+                        textAlign="center"
+                        className="header-nav-link-mobile"
+                      >
+                        {page.title}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ) : null
+              )}
             </Menu>
           </Box>
 
@@ -142,16 +142,22 @@ const Header = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={page.url} className="header-nav-item" key={page.title}>
-                <Typography
-                  textAlign="center"
-                  className="header-nav-link-desktop"
+            {pages.map((page) =>
+              page.noLogin || isLoggedIn ? (
+                <Link
+                  to={page.url}
+                  className="header-nav-item"
+                  key={page.title}
                 >
-                  {page.title}
-                </Typography>
-              </Link>
-            ))}
+                  <Typography
+                    textAlign="center"
+                    className="header-nav-link-desktop"
+                  >
+                    {page.title}
+                  </Typography>
+                </Link>
+              ) : null
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
