@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import Button from "@mui/material/Button";
-import TokenTransfer from "./TokenTransfer";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import TokenTransferModal from "./TokenTransferModal";
+import TokenTransferResultModal from "./TokenTransferResultModal";
 import { retrieveWalletAddress } from "../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
 import "./style.css";
@@ -11,7 +19,8 @@ export default function MyTokens() {
   const [balance, setBalance] = useState();
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
-  const [tokenIdToTransfer, setTokenIdToTransfer] = useState();
+  const [tokenIdToTransfer, setTokenIdToTransfer] = useState(null);
+  const [transferResult, setTransferResult] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -44,29 +53,67 @@ export default function MyTokens() {
   return account ? (
     <div className="my-tokens-container">
       <span>My Tokens</span>
-      <span>{balance}</span>
-      {tokensId && tokensData
-        ? tokensId.map((id, index) => (
-            <div className="token-container" key={index}>
-              <div className="token-id">{id}</div>
-              <div className="token-data">{tokensData[index]}</div>
-              <Button
-                onClick={() => {
-                  if (tokenIdToTransfer === id) {
-                    setTokenIdToTransfer(null);
-                  } else {
-                    setTokenIdToTransfer(id);
-                  }
-                }}
-              >
-                Transfer
-              </Button>
-              {tokenIdToTransfer && tokenIdToTransfer === id ? (
-                <TokenTransfer tokenId={id} />
-              ) : null}
-            </div>
-          ))
-        : null}
+      <span>Count: {balance}</span>
+      {tokensId && tokensData ? (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Token ID</TableCell>
+                <TableCell align="center">Token Data</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tokensId.map((id, index) => {
+                let idString = id.toString();
+                return (
+                  <TableRow
+                    key={id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {idString.substring(0, 5) +
+                        "..." +
+                        idString.substring(idString.length - 5)}
+                    </TableCell>
+                    <TableCell align="center">{tokensData[index]}</TableCell>
+                    <TableCell align="center">
+                      <Button
+                        onClick={() => {
+                          if (tokenIdToTransfer === id) {
+                            setTokenIdToTransfer(null);
+                          } else {
+                            setTokenIdToTransfer(id);
+                          }
+                        }}
+                      >
+                        Transfer
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : null}
+
+      <TokenTransferModal
+        show={!!tokenIdToTransfer}
+        tokenId={tokenIdToTransfer}
+        onClose={(result) => {
+          setTransferResult(result);
+          setTokenIdToTransfer(null);
+        }}
+      />
+      <TokenTransferResultModal
+        show={transferResult != null}
+        onClose={() => {
+          setTransferResult(null);
+        }}
+        result={transferResult}
+      />
     </div>
   ) : (
     <div className="my-tokens-container">

@@ -28,7 +28,10 @@ function Mint() {
       .mint(data)
       .send({ from: account })
       .then(() => {
-        console.log("Minted");
+        console.info("Minted");
+      })
+      .catch((e) => {
+        console.err(e);
       });
   };
 
