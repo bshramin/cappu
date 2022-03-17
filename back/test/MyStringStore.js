@@ -5,10 +5,10 @@ contract("Cappu", (accounts) => {
     const cappu = await Cappu.deployed();
 
     // Set myString to "Hey there!"
-    await cappu.set("Hey there!", { from: accounts[0] });
+    await cappu.setString("Hey there!");
 
     // Get myString from public variable getter
-    const storedString = await cappu.myString.call();
+    const storedString = await cappu.getString.call();
 
     assert.equal(storedString, "Hey there!", "The string was not stored");
   });

@@ -5,7 +5,7 @@ contract("Cappu", (accounts) => {
     const cappu = await Cappu.deployed();
 
     // Set myString to "Hey there!"
-    await cappu.mint(accounts[0], "Hey there!", { from: accounts[0] });
+    await cappu.mint("Hey there!", { from: accounts[0] });
 
     // Get myString from public variable getter
     const storedString = await cappu.balanceOf(accounts[0], {
