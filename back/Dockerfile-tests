@@ -1,0 +1,15 @@
+# Push to dockerhub
+FROM node:16.14
+
+RUN npm install -g truffle@v5.4.33
+
+RUN mkdir cappu
+WORKDIR /cappu
+
+COPY package-lock.json .
+COPY package.json .
+RUN npm install
+
+ADD . .
+
+CMD [ "truffle", "test" ]
