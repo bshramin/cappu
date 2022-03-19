@@ -1,7 +1,4 @@
-# Push to dockerhub
-FROM node:16.14
-
-RUN npm install -g truffle@v5.4.33
+FROM aminbshr/truffle:5.4.33-node16.14
 
 RUN mkdir cappu
 WORKDIR /cappu
