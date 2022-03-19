@@ -1,0 +1,18 @@
+name: Test Contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build ./back --file back/Dockerfile-tests --tag cappu-b:${GITHUB_SHA::6}
+      - name: Run tests
+        run: docker run cappu-b:${GITHUB_SHA::6}
