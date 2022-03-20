@@ -1,7 +1,7 @@
-export const NETWORK = "http://localhost:7545"; // For dev with Ganache network
+// export const NETWORK = "http://localhost:7545"; // For dev with Ganache network
 
-// export const NETWORK =
-//   "https://speedy-nodes-nyc.moralis.io/91eaf4d08216c15dcf25aa72/eth/ropsten"; // Ropsten test network
+export const NETWORK =
+  "https://speedy-nodes-nyc.moralis.io/91eaf4d08216c15dcf25aa72/eth/ropsten"; // Ropsten test network
 
 export const CONTACT_ADDRESS = "0x44AB078dEEF96Bd38d00FcDc3e2F1634CF8bD9C3"; // Change this to the new address of the contract
 
