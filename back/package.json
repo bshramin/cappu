@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/bshramin/cappu#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.3.3"
+    "@openzeppelin/contracts": "^4.3.3",
+    "@truffle/hdwallet-provider": "^2.0.4"
   }
 }

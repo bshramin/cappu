@@ -1,3 +1,2 @@
-# Cappu
-
-The NFT Platform.
+# Cappu, The NFT Platform.
+There are more detailed readme files for each part of the project in the [front](https://github.com/bshramin/cappu/tree/main/front) and [back](https://github.com/bshramin/cappu/tree/main/back) folders.
