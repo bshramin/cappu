@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TokenTransferModal from "./TokenTransferModal";
-import TokenTransferResultModal from "./TokenTransferResultModal";
+import ResultModal from "../../components/ResultModal";
 import { retrieveWalletAddress } from "../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
 import "./style.css";
@@ -19,33 +19,29 @@ export default function MyTokens() {
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
   const [tokenIdToTransfer, setTokenIdToTransfer] = useState(null);
-  const [transferResult, setTransferResult] = useState(null);
+  const [resultModalMsg, setResultModalMsg] = useState(null);
+  const [resultModalColor, setResultModalColor] = useState(null);
 
   useEffect(() => {
-    const load = async () => {
-      let account = retrieveWalletAddress();
-      if (account) {
-        const web3 = new Web3(Web3.givenProvider || NETWORK);
-        const cappuContract = new web3.eth.Contract(
-          CONTACT_ABI,
-          CONTACT_ADDRESS
-        );
-
-        const output = await cappuContract.methods
-          .getUserTokens(account)
-          .call();
-
-        const id = output[0];
-        const data = output[1];
-
-        setAccount(account);
-        setTokensId(id);
-        setTokensData(data);
-      }
-    };
-
     load();
   }, []);
+
+  const load = async () => {
+    let account = retrieveWalletAddress();
+    if (account) {
+      const web3 = new Web3(Web3.givenProvider || NETWORK);
+      const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+
+      const output = await cappuContract.methods.getUserTokens(account).call();
+
+      const id = output[0];
+      const data = output[1];
+
+      setAccount(account);
+      setTokensId(id);
+      setTokensData(data);
+    }
+  };
 
   return (
     <div className="my-tokens-container">
@@ -108,17 +104,30 @@ export default function MyTokens() {
       <TokenTransferModal
         show={!!tokenIdToTransfer}
         tokenId={tokenIdToTransfer}
-        onClose={(result) => {
-          setTransferResult(result);
+        onError={(errMsg) => {
+          setResultModalMsg(errMsg);
+          setResultModalColor("red");
+          setTokenIdToTransfer(null);
+        }}
+        onSuccess={() => {
+          setResultModalMsg("Token transferred successfully");
+          setResultModalColor("green");
+          setTokenIdToTransfer(null);
+          load();
+        }}
+        onClose={() => {
           setTokenIdToTransfer(null);
         }}
       />
-      <TokenTransferResultModal
-        show={transferResult != null}
+      <ResultModal
+        show={!!resultModalMsg}
         onClose={() => {
-          setTransferResult(null);
+          setTokenIdToTransfer(null);
+          setResultModalMsg(null);
+          setResultModalColor(null);
         }}
-        result={transferResult}
+        color={resultModalColor}
+        text={resultModalMsg}
       />
     </div>
   );

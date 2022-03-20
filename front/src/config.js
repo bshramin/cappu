@@ -1,6 +1,6 @@
 export const NETWORK = "http://localhost:7545"; // Change this to your network address
 
-export const CONTACT_ADDRESS = "0x63DE61059e0558D415519004cf4c41E104122d5C"; // Change this to the new address of the contract
+export const CONTACT_ADDRESS = "0x993b5764C38c7357A658aD8931022A64D27ce3Ab"; // Change this to the new address of the contract
 
 export const CONTACT_ABI = [
   {
