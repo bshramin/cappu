@@ -4,12 +4,16 @@ import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { retrieveWalletAddress } from "../../helpers/connect";
 import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
+import ResultModal from "../../components/ResultModal";
+import { extractErrorMessage } from "../../helpers/errors";
 import "./style.css";
 
 function Mint() {
   const [account, setAccount] = useState();
   const [contract, setContract] = useState();
   const [data, setData] = useState();
+  const [errMsg, setErrMsg] = useState();
+  const [mintSuccess, setMintSuccess] = useState();
 
   useEffect(() => {
     const load = async () => {
@@ -29,27 +33,47 @@ function Mint() {
       .send({ from: account })
       .then(() => {
         console.info("Minted");
+        setMintSuccess(true);
       })
       .catch((e) => {
-        console.err(e);
+        setMintSuccess(false);
+        setErrMsg(extractErrorMessage(e));
       });
   };
 
-  return account ? (
+  return (
     <div className="mint-container">
-      <Input
-        placeholder="Insert token data here..."
-        multiline
-        minRows="4"
-        onChange={(e) => setData(e.target.value)}
+      {(() => {
+        if (!account) {
+          return <span>Connect your wallet</span>;
+        }
+        return (
+          <div>
+            <Input
+              placeholder="Insert token data here..."
+              multiline
+              minRows="4"
+              onChange={(e) => setData(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              className="submit-btn"
+              onClick={mintToken}
+            >
+              Mint
+            </Button>
+          </div>
+        );
+      })()}
+      <ResultModal
+        show={mintSuccess != null}
+        onClose={() => {
+          setMintSuccess(null);
+          setErrMsg(null);
+        }}
+        color={mintSuccess ? "green" : "red"}
+        text={mintSuccess ? "Minted" : errMsg}
       />
-      <Button variant="contained" className="submit-btn" onClick={mintToken}>
-        Mint
-      </Button>
-    </div>
-  ) : (
-    <div className="mint-container">
-      <div>Connect your wallet</div>
     </div>
   );
 }
