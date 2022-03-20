@@ -1,1 +1,1 @@
-Empty for now.
+Deployed on Github Pages [here](https://bshramin.github.io/cappu/) with the help of [This tutorial](https://hackernoon.com/how-to-deploy-a-react-app-to-github-pages).

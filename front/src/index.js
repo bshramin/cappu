@@ -13,7 +13,7 @@ import "@fontsource/roboto/700.css";
 import "./index.css";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Header />
     <div className="main-section">
       <Routes>
