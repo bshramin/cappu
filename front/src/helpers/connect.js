@@ -2,7 +2,13 @@ import Web3 from "web3";
 import { NETWORK } from "../config";
 
 export const connectWallet = async () => {
-  console.log("Connecting to Wallet...");
+  console.info("Connecting to Wallet...");
+  if (typeof window.ethereum === "undefined") {
+    console.info("MetaMask is not installed!");
+    alert("You need to install the Metamask extension.");
+    return;
+  }
+
   const web3 = new Web3(Web3.givenProvider || NETWORK);
   const accounts = await web3.eth.requestAccounts();
   window.sessionStorage.setItem("account", accounts[0]);

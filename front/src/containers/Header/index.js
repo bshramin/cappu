@@ -86,51 +86,53 @@ const Header = () => {
             <Link to="/">Cappu</Link>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) =>
-                page.noLogin || isLoggedIn ? (
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                    <Link to={page.url}>
-                      <Typography
-                        textAlign="center"
-                        className="header-nav-link-mobile"
-                      >
-                        {page.title}
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                ) : null
-              )}
-            </Menu>
-          </Box>
+          {isLoggedIn ? (
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) =>
+                  page.noLogin || isLoggedIn ? (
+                    <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                      <Link to={page.url}>
+                        <Typography
+                          textAlign="center"
+                          className="header-nav-link-mobile"
+                        >
+                          {page.title}
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  ) : null
+                )}
+              </Menu>
+            </Box>
+          ) : null}
 
           <Typography
             variant="h6"
