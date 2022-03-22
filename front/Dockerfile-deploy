@@ -3,17 +3,30 @@ FROM node
 
 # set working directory
 WORKDIR /app
+RUN mkdir -p front/build
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+# Will overwrite these envs on "docker run" command
+ENV GITHUB_REPOSITORY bshramin/cappu
+ENV GITHUB_TOKEN null
+ENV NAME cappu
+ENV EMAIL cappu@cappu.com
+
 # install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
+WORKDIR /app/front
+COPY front/package.json .
+COPY front/package-lock.json .
 RUN npm install --silent
 
+# Copy git info, we need this to deploy on github pages
+WORKDIR /app
+COPY .git ./.git
+
 # add app
-COPY . ./
+WORKDIR /app/front
+COPY front/ .
 
 # start app
-CMD ["npm", "run", "deploy"]
+CMD ["npm", "run", "deploy-docker"]
