@@ -4,19 +4,10 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Helper.sol";
 
 contract Cappu is ERC721, Helper {
-    string private myString = "Hello World";
     mapping(uint256 => string) tokenDatas;
     mapping(address => uint256[]) ownerTokens;
 
     constructor() ERC721("Cappu", "CAPU") {}
-
-    function getString() public view returns (string memory) {
-        return myString;
-    }
-
-    function setString(string memory x) public {
-        myString = x;
-    }
 
     function mint(string memory data) public {
         uint256 theHash = uint256(keccak256(abi.encode(data)));
@@ -46,5 +37,17 @@ contract Cappu is ERC721, Helper {
         safeTransferFrom(from, to, tokenId);
         ownerTokens[from] = removeItemFromArray(tokenId, ownerTokens[from]);
         ownerTokens[to].push(tokenId);
+    }
+
+    function numberOfTokenHolders() public view returns (uint256) {
+        // TODO: Implement
+    }
+
+    function numberOfUsersIntracted() public view returns (uint256) {
+        // TODO: Implement
+    }
+
+    function numberOfMintedTokens() public view returns (uint256) {
+        // TODO: Implement
     }
 }
