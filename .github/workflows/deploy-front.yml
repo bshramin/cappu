@@ -1,0 +1,17 @@
+name: Build and Deploy Front
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build ./front --file front/Dockerfile-deploy --tag cappu-f-d:${GITHUB_SHA::6}
+      - name: Deploy
+        run: docker run cappu-f-d:${GITHUB_SHA::6}
