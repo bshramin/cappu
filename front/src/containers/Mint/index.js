@@ -48,21 +48,22 @@ function Mint() {
           return <span>Connect your wallet</span>;
         }
         return (
-          <div>
+          <>
             <Input
               placeholder="Insert token data here..."
               multiline
               minRows="4"
+              className="mint-input"
               onChange={(e) => setData(e.target.value)}
             />
             <Button
               variant="contained"
-              className="submit-btn"
+              className="mint-submit"
               onClick={mintToken}
             >
               Mint
             </Button>
-          </div>
+          </>
         );
       })()}
       <ResultModal

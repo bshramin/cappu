@@ -7,6 +7,10 @@
   height: 100%;
 }
 
-.submit-btn {
+.mint-input{
+  width: 100%;
+}
+
+.mint-submit {
   margin-top: 20px !important;
 }
