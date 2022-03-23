@@ -18,3 +18,7 @@ p {
 .header-nav-link-desktop {
   color:white;
 }
+
+.connect-btn {
+  color: white !important;
+}

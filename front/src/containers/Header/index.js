@@ -9,8 +9,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import {
   connectWallet,
@@ -25,6 +25,20 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
+  const retrieveUserWalletAddress = () => {
+    let adrs = retrieveWalletAddress();
+    if (!adrs) {
+      return;
+    }
+    return adrs.substring(0, 5) + "..." + adrs.substring(adrs.length - 5);
+  };
+
+  const connectUserWallet = () => {
+    connectWallet().then(() => {
+      setIsLoggedIn(isWalletConnected());
+    });
+  };
+
   const pages = [
     { title: "Mint", url: "/mint", noLogin: false },
     { title: "My Tokens", url: "/my-tokens", noLogin: false },
@@ -32,17 +46,9 @@ const Header = () => {
 
   const settings = [
     {
-      title: retrieveWalletAddress(),
-      login: true,
-    },
-    {
       title: "Connect Wallet",
       login: false,
-      onClick: () => {
-        connectWallet().then(() => {
-          setIsLoggedIn(isWalletConnected());
-        });
-      },
+      onClick: connectUserWallet,
     },
     {
       title: "Disconnect Wallet",
@@ -163,10 +169,14 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Cappu" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+            <Tooltip title="Wallet Options">
+              <Button
+                onClick={isLoggedIn ? handleOpenUserMenu : connectUserWallet}
+                className="connect-btn"
+                sx={{ p: 0 }}
+              >
+                {isLoggedIn ? retrieveUserWalletAddress() : "Connect Wallet"}
+              </Button>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
