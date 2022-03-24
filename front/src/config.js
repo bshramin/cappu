@@ -2,7 +2,7 @@
 // export const NETWORK_NAME = "Local";
 // export const NETWORK = "http://localhost:7545";
 
-export const NETWORK_NAME = "Ropsten";
+export const NETWORK_NAME = "ropsten";
 export const NETWORK =
   "https://speedy-nodes-nyc.moralis.io/91eaf4d08216c15dcf25aa72/eth/ropsten";
 

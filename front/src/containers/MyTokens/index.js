@@ -11,11 +11,17 @@ import Paper from "@mui/material/Paper";
 import TokenTransferModal from "./TokenTransferModal";
 import ResultModal from "../../components/ResultModal";
 import { retrieveWalletAddress } from "../../helpers/connect";
-import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../config";
+import {
+  CONTACT_ABI,
+  CONTACT_ADDRESS,
+  NETWORK,
+  NETWORK_NAME,
+} from "../../config";
 import "./style.css";
 
 export default function MyTokens() {
   const [account, setAccount] = useState();
+  const [networkName, setNetworkName] = useState();
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
   const [tokenIdToTransfer, setTokenIdToTransfer] = useState(null);
@@ -28,16 +34,21 @@ export default function MyTokens() {
 
   const load = async () => {
     let account = retrieveWalletAddress();
+    setAccount(account);
     if (account) {
       const web3 = new Web3(Web3.givenProvider || NETWORK);
       const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+      const netName = await web3.eth.net.getNetworkType();
+      setNetworkName(netName);
+      if (netName !== NETWORK_NAME) {
+        console.info("Wrong network!");
+        return;
+      }
 
       const output = await cappuContract.methods.getUserTokens(account).call();
-
       const id = output[0];
       const data = output[1];
 
-      setAccount(account);
       setTokensId(id);
       setTokensData(data);
     }
@@ -48,6 +59,16 @@ export default function MyTokens() {
       {(() => {
         if (!account) {
           return <span>Connect your wallet</span>;
+        }
+        if (networkName !== NETWORK_NAME) {
+          return (
+            <span>
+              {" "}
+              {"You need to connect your wallet to the " +
+                NETWORK_NAME +
+                " network."}
+            </span>
+          );
         }
         if (!tokensId || !tokensData) {
           return <span>Failed to load tokens</span>;

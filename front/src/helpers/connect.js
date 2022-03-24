@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import { NETWORK } from "../config";
+import { NETWORK, NETWORK_NAME } from "../config";
 
 export const connectWallet = async () => {
   console.info("Connecting to Wallet...");
@@ -10,6 +10,15 @@ export const connectWallet = async () => {
   }
 
   const web3 = new Web3(Web3.givenProvider || NETWORK);
+  web3.eth.net.getNetworkType().then((net) => {
+    if (net !== NETWORK_NAME) {
+      console.info("Wrong network!");
+      alert(
+        "You need to connect your wallet to the " + NETWORK_NAME + " network."
+      );
+      return;
+    }
+  });
   const accounts = await web3.eth.requestAccounts();
   window.sessionStorage.setItem("account", accounts[0]);
   window.location.reload();
