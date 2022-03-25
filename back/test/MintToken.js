@@ -1,17 +1,15 @@
 const Cappu = artifacts.require("./Cappu.sol");
 
 contract("Cappu", (accounts) => {
-  it("should mint a NFT", async () => {
+  it("should mint a token", async () => {
     const cappu = await Cappu.deployed();
 
-    // Set myString to "Hey there!"
     await cappu.mint("Hey there!", { from: accounts[0] });
 
-    // Get myString from public variable getter
-    const storedString = await cappu.balanceOf(accounts[0], {
+    const balance = await cappu.balanceOf(accounts[0], {
       from: accounts[0],
     });
 
-    assert.equal(storedString, 1);
+    assert.equal(balance, 1);
   });
 });

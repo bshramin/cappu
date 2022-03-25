@@ -1,6 +1,7 @@
 // For development with Ganache.
 // export const NETWORK_NAME = "Local";
 // export const NETWORK = "http://localhost:7545";
+// export const CONTACT_ADDRESS = "0x3Ce1aA8c110a74810Db3CCC4A7D8aE97ae9F907C";
 
 export const NETWORK_NAME = "ropsten";
 export const NETWORK =
@@ -353,33 +354,6 @@ export const CONTACT_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "getString",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "x",
-        type: "string",
-      },
-    ],
-    name: "setString",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "string",
@@ -418,26 +392,31 @@ export const CONTACT_ABI = [
     constant: true,
   },
   {
-    inputs: [
+    inputs: [],
+    name: "getNumberOfTokenHolders",
+    outputs: [
       {
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
+        internalType: "uint64",
+        name: "",
+        type: "uint64",
       },
     ],
-    name: "safeSendToken",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: "getNumberOfMintedTokens",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
 ];
