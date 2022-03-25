@@ -6,8 +6,7 @@
 export const NETWORK_NAME = "ropsten";
 export const NETWORK =
   "https://speedy-nodes-nyc.moralis.io/91eaf4d08216c15dcf25aa72/eth/ropsten";
-
-export const CONTACT_ADDRESS = "0xec2638fb1c15e0dbadc8ecd9cb6f71cbe6ae4479"; // Change this to the new address of the contract
+export const CONTACT_ADDRESS = "0xf1359760a1b37a9f8d85341E72cEF0644DB660A1"; // Change this to the new address of the contract
 
 export const CONTACT_ABI = [
   {

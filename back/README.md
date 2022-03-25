@@ -16,8 +16,3 @@
 </br>&check; migrate
 </br>&check; https://ropsten.etherscan.io/
 </br>&check; Connect metamask and front
-
-## Sample deployed contract and owner address on Ropsten:
-
-Contract: https://ropsten.etherscan.io/address/0xec2638fb1c15e0dbadc8ecd9cb6f71cbe6ae4479 </br>
-Owner: https://ropsten.etherscan.io/address/0xf51f5f41bfa8ada57a43862cbc18da4750aecb4c
