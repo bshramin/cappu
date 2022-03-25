@@ -34,7 +34,7 @@ export default function TokenTransferModal({
   const sendToken = async () => {
     try {
       await contract.methods
-        .safeSendToken(account, destination, tokenId)
+        .safeTransferFrom(account, destination, tokenId)
         .send({ from: account })
         .then(() => {
           console.info("Sent successfully");
