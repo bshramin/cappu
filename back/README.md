@@ -19,5 +19,5 @@
 
 ## Sample deployed contract and owner address on Ropsten:
 
-Contract: https://ropsten.etherscan.io/address/0x44AB078dEEF96Bd38d00FcDc3e2F1634CF8bD9C3 </br>
+Contract: https://ropsten.etherscan.io/address/0xec2638fb1c15e0dbadc8ecd9cb6f71cbe6ae4479 </br>
 Owner: https://ropsten.etherscan.io/address/0xf51f5f41bfa8ada57a43862cbc18da4750aecb4c
