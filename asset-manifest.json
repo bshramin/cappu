@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cappu/static/css/main.af3dc881.chunk.css",
+    "main.css": "/cappu/static/css/main.143ab52f.chunk.css",
     "main.js": "/cappu/static/js/main.6406930a.chunk.js",
     "main.js.map": "/cappu/static/js/main.6406930a.chunk.js.map",
     "runtime-main.js": "/cappu/static/js/runtime-main.d1396e48.js",
@@ -10,7 +10,7 @@
     "static/js/2.25a539ff.chunk.js.map": "/cappu/static/js/2.25a539ff.chunk.js.map",
     "index.html": "/cappu/index.html",
     "static/css/2.fc5ef72a.chunk.css.map": "/cappu/static/css/2.fc5ef72a.chunk.css.map",
-    "static/css/main.af3dc881.chunk.css.map": "/cappu/static/css/main.af3dc881.chunk.css.map",
+    "static/css/main.143ab52f.chunk.css.map": "/cappu/static/css/main.143ab52f.chunk.css.map",
     "static/js/2.25a539ff.chunk.js.LICENSE.txt": "/cappu/static/js/2.25a539ff.chunk.js.LICENSE.txt",
     "static/media/300.css": "/cappu/static/media/roboto-vietnamese-300-normal.af9afdc1.woff2",
     "static/media/400.css": "/cappu/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2",
@@ -21,7 +21,7 @@
     "static/js/runtime-main.d1396e48.js",
     "static/css/2.fc5ef72a.chunk.css",
     "static/js/2.25a539ff.chunk.js",
-    "static/css/main.af3dc881.chunk.css",
+    "static/css/main.143ab52f.chunk.css",
     "static/js/main.6406930a.chunk.js"
   ]
 }
