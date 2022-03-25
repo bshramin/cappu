@@ -125,7 +125,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -145,7 +144,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -170,7 +168,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [],
@@ -184,7 +181,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -204,7 +200,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -293,7 +288,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [],
@@ -307,7 +301,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -327,7 +320,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -388,7 +380,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [],
@@ -402,7 +393,6 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [],
@@ -416,6 +406,5 @@ export const CONTACT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
 ];
