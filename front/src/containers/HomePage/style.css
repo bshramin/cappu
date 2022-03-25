@@ -1,3 +1,7 @@
+.homepage-description {
+  overflow-wrap: break-word;
+}
+
 .homepage-info {
   margin-top: 30px;
 }
