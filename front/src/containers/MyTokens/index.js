@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Web3 from "web3";
 import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,13 +9,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TokenTransferModal from "./TokenTransferModal";
 import ResultModal from "../../components/ResultModal";
-import { retrieveWalletAddress } from "../../helpers/connect";
 import {
-  CONTACT_ABI,
-  CONTACT_ADDRESS,
-  NETWORK,
-  NETWORK_NAME,
-} from "../../config";
+  retrieveWalletAddress,
+  getContract,
+  getDesiredNetworkName,
+  getWalletNetworkName,
+} from "../../helpers/connect";
 import "./style.css";
 
 export default function MyTokens() {
@@ -36,11 +34,9 @@ export default function MyTokens() {
     let account = retrieveWalletAddress();
     setAccount(account);
     if (account) {
-      const web3 = new Web3(Web3.givenProvider || NETWORK);
-      const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
-      const netName = await web3.eth.net.getNetworkType();
-      setNetworkName(netName);
-      if (netName !== NETWORK_NAME) {
+      const cappuContract = await getContract();
+      const netName = await getWalletNetworkName();
+      if (netName !== getDesiredNetworkName()) {
         console.info("Wrong network!");
         return;
       }
@@ -48,7 +44,7 @@ export default function MyTokens() {
       const output = await cappuContract.methods.getUserTokens(account).call();
       const id = output[0];
       const data = output[1];
-
+      setNetworkName(netName);
       setTokensId(id);
       setTokensData(data);
     }
@@ -60,12 +56,12 @@ export default function MyTokens() {
         if (!account) {
           return <span>Connect your wallet</span>;
         }
-        if (networkName !== NETWORK_NAME) {
+        if (networkName !== getDesiredNetworkName()) {
           return (
             <span>
               {" "}
               {"You need to connect your wallet to the " +
-                NETWORK_NAME +
+                getDesiredNetworkName() +
                 " network."}
             </span>
           );

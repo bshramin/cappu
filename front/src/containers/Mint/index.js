@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import Web3 from "web3";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
-import { retrieveWalletAddress } from "../../helpers/connect";
 import {
-  CONTACT_ABI,
-  CONTACT_ADDRESS,
-  NETWORK,
-  NETWORK_NAME,
-} from "../../config";
+  retrieveWalletAddress,
+  getContract,
+  getWalletNetworkName,
+  getDesiredNetworkName,
+} from "../../helpers/connect";
 import ResultModal from "../../components/ResultModal";
 import { extractErrorMessage } from "../../helpers/errors";
 import "./style.css";
@@ -24,10 +22,9 @@ function Mint() {
   useEffect(() => {
     const load = async () => {
       setAccount(retrieveWalletAddress());
-      const web3 = new Web3(Web3.givenProvider || NETWORK);
-      const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+      const cappuContract = await getContract();
       setContract(cappuContract);
-      const netName = await web3.eth.net.getNetworkType();
+      const netName = await getWalletNetworkName();
       setNetworkName(netName);
     };
 
@@ -54,12 +51,12 @@ function Mint() {
         if (!account) {
           return <span>Connect your wallet</span>;
         }
-        if (networkName !== NETWORK_NAME) {
+        if (networkName !== getDesiredNetworkName()) {
           return (
             <span>
               {" "}
               {"You need to connect your wallet to the " +
-                NETWORK_NAME +
+                getDesiredNetworkName() +
                 " network."}
             </span>
           );
