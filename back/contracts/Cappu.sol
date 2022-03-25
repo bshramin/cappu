@@ -6,14 +6,35 @@ import "./Helper.sol";
 contract Cappu is ERC721, Helper {
     mapping(uint256 => string) tokenDatas;
     mapping(address => uint256[]) ownerTokens;
+    uint64 numberOfTokenHolders;
+    uint64 numberOfMintedTokens;
 
     constructor() ERC721("Cappu", "CAPU") {}
 
     function mint(string memory data) public {
         uint256 theHash = uint256(keccak256(abi.encode(data)));
-        _mint(msg.sender, theHash);
+        _safeMint(msg.sender, theHash);
         tokenDatas[theHash] = data;
-        ownerTokens[msg.sender].push(theHash);
+        numberOfMintedTokens++;
+    }
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override {
+        if (from != address(0)) {
+            ownerTokens[from] = removeItemFromArray(tokenId, ownerTokens[from]);
+            if (ownerTokens[from].length == 0) {
+                numberOfTokenHolders--;
+            }
+        }
+        if (to != address(0)) {
+            ownerTokens[to].push(tokenId);
+            if (ownerTokens[to].length == 1) {
+                numberOfTokenHolders++;
+            }
+        }
     }
 
     function getUserTokens(address user)
@@ -29,25 +50,11 @@ contract Cappu is ERC721, Helper {
         return (tokens, datas);
     }
 
-    function safeSendToken(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public {
-        safeTransferFrom(from, to, tokenId);
-        ownerTokens[from] = removeItemFromArray(tokenId, ownerTokens[from]);
-        ownerTokens[to].push(tokenId);
+    function getNumberOfTokenHolders() public view returns (uint64) {
+        return numberOfTokenHolders;
     }
 
-    function numberOfTokenHolders() public view returns (uint256) {
-        // TODO: Implement
-    }
-
-    function numberOfUsersIntracted() public view returns (uint256) {
-        // TODO: Implement
-    }
-
-    function numberOfMintedTokens() public view returns (uint256) {
-        // TODO: Implement
+    function getNumberOfMintedTokens() public view returns (uint64) {
+        return numberOfMintedTokens;
     }
 }
