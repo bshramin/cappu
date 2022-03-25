@@ -4,18 +4,18 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Helper.sol";
 
 contract Cappu is ERC721, Helper {
-    mapping(uint256 => string) tokenDatas;
-    mapping(address => uint256[]) ownerTokens;
-    uint64 numberOfTokenHolders;
-    uint64 numberOfMintedTokens;
+    mapping(uint256 => string) private _tokenDatas;
+    mapping(address => uint256[]) private _ownerTokens;
+    uint64 private _numberOfTokenHolders;
+    uint64 private _numberOfMintedTokens;
 
     constructor() ERC721("Cappu", "CAPU") {}
 
     function mint(string memory data) public {
         uint256 theHash = uint256(keccak256(abi.encode(data)));
         _safeMint(msg.sender, theHash);
-        tokenDatas[theHash] = data;
-        numberOfMintedTokens++;
+        _tokenDatas[theHash] = data;
+        _numberOfMintedTokens++;
     }
 
     function _afterTokenTransfer(
@@ -24,15 +24,18 @@ contract Cappu is ERC721, Helper {
         uint256 tokenId
     ) internal virtual override {
         if (from != address(0)) {
-            ownerTokens[from] = removeItemFromArray(tokenId, ownerTokens[from]);
-            if (ownerTokens[from].length == 0) {
-                numberOfTokenHolders--;
+            _ownerTokens[from] = removeItemFromArray(
+                tokenId,
+                _ownerTokens[from]
+            );
+            if (_ownerTokens[from].length == 0) {
+                _numberOfTokenHolders--;
             }
         }
         if (to != address(0)) {
-            ownerTokens[to].push(tokenId);
-            if (ownerTokens[to].length == 1) {
-                numberOfTokenHolders++;
+            _ownerTokens[to].push(tokenId);
+            if (_ownerTokens[to].length == 1) {
+                _numberOfTokenHolders++;
             }
         }
     }
@@ -42,19 +45,19 @@ contract Cappu is ERC721, Helper {
         view
         returns (uint256[] memory, string[] memory)
     {
-        uint256[] memory tokens = ownerTokens[user];
+        uint256[] memory tokens = _ownerTokens[user];
         string[] memory datas = new string[](tokens.length);
         for (uint256 i = 0; i < tokens.length; i++) {
-            datas[i] = tokenDatas[tokens[i]];
+            datas[i] = _tokenDatas[tokens[i]];
         }
         return (tokens, datas);
     }
 
     function getNumberOfTokenHolders() public view returns (uint64) {
-        return numberOfTokenHolders;
+        return _numberOfTokenHolders;
     }
 
     function getNumberOfMintedTokens() public view returns (uint64) {
-        return numberOfMintedTokens;
+        return _numberOfMintedTokens;
     }
 }
