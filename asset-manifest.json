@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cappu/static/css/main.af3dc881.chunk.css",
-    "main.js": "/cappu/static/js/main.5670a902.chunk.js",
-    "main.js.map": "/cappu/static/js/main.5670a902.chunk.js.map",
+    "main.js": "/cappu/static/js/main.6406930a.chunk.js",
+    "main.js.map": "/cappu/static/js/main.6406930a.chunk.js.map",
     "runtime-main.js": "/cappu/static/js/runtime-main.d1396e48.js",
     "runtime-main.js.map": "/cappu/static/js/runtime-main.d1396e48.js.map",
     "static/css/2.fc5ef72a.chunk.css": "/cappu/static/css/2.fc5ef72a.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.fc5ef72a.chunk.css",
     "static/js/2.25a539ff.chunk.js",
     "static/css/main.af3dc881.chunk.css",
-    "static/js/main.5670a902.chunk.js"
+    "static/js/main.6406930a.chunk.js"
   ]
 }
