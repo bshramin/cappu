@@ -3,6 +3,8 @@
 // export const NETWORK = "http://localhost:7545";
 // export const CONTACT_ADDRESS = "0x3Ce1aA8c110a74810Db3CCC4A7D8aE97ae9F907C";
 
+export const DAPP_URL = "bshramin.github.io/cappu";
+export const METAMASK_DEEPLINK_PREFIX = "https://metamask.app.link/dapp/";
 export const NETWORK_NAME = "ropsten";
 export const NETWORK =
   "https://speedy-nodes-nyc.moralis.io/91eaf4d08216c15dcf25aa72/eth/ropsten";

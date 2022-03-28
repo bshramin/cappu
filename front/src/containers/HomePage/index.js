@@ -7,7 +7,9 @@ import {
   getContract,
   getContractAddress,
   getDesiredNetworkName,
+  connectWallet,
 } from "../../helpers/connect";
+import { DAPP_URL, METAMASK_DEEPLINK_PREFIX } from "../../config.js";
 
 import "./style.css";
 
@@ -76,32 +78,17 @@ export default function HomePage() {
           </div>
         ) : null}
       </div>
+
       <div className="homepage-actions">
         <ButtonGroup
           variant="contained"
           aria-label="outlined primary button group"
         >
+          <Button onClick={connectWallet}>Connect Metamask Extension</Button>
           <Button
-            startIcon={<GitHub fontSize="large" color="background" />}
-            onClick={() =>
-              window.open("https://github.com/bshramin/cappu", "_blank")
-            }
+            onClick={() => window.open(METAMASK_DEEPLINK_PREFIX + DAPP_URL)}
           >
-            View on GitHub
-          </Button>
-          <Button
-            onClick={() =>
-              window.open(
-                "https://" +
-                  getDesiredNetworkName() +
-                  ".etherscan.io/address/" +
-                  getContractAddress(),
-                "_blank"
-              )
-            }
-            startIcon={<TravelExplore fontSize="large" color="background" />}
-          >
-            Explore on EtherScan
+            Open in Metamask Browser
           </Button>
         </ButtonGroup>
       </div>
