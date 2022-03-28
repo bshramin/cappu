@@ -3,15 +3,12 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import GitHub from "@mui/icons-material/GitHub";
 import TravelExplore from "@mui/icons-material/TravelExplore";
-
-import Web3 from "web3";
-
 import {
-  CONTACT_ABI,
-  CONTACT_ADDRESS,
-  NETWORK,
-  NETWORK_NAME,
-} from "../../config";
+  getContract,
+  getContractAddress,
+  getDesiredNetworkName,
+} from "../../helpers/connect";
+
 import "./style.css";
 
 export default function HomePage() {
@@ -23,18 +20,18 @@ export default function HomePage() {
   }, []);
 
   const load = async () => {
-    const web3 = new Web3(Web3.givenProvider || NETWORK);
-    const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
-
+    const cappuContract = await getContract();
     cappuContract.methods
       .getNumberOfTokenHolders()
       .call()
-      .then(setNumberOfTokenHolders);
+      .then(setNumberOfTokenHolders)
+      .catch(console.error);
 
     cappuContract.methods
       .getNumberOfMintedTokens()
       .call()
-      .then(setNumberOfMintedTokens);
+      .then(setNumberOfMintedTokens)
+      .catch(console.error);
   };
 
   return (
@@ -48,14 +45,14 @@ export default function HomePage() {
         <br />
         <br />
         This front-end currently contacts the contract deployed on the{" "}
-        {NETWORK_NAME} network, at this address:
+        {getDesiredNetworkName()} network, at this address:
         <br />
-        {CONTACT_ADDRESS}
+        {getContractAddress()}
         <br />
         <br />
         You need to have the Metamask extention installed and choose the{" "}
-        {NETWORK_NAME} network, then you can connect your wallet and start using
-        the platform.
+        {getDesiredNetworkName()} network, then you can connect your wallet and
+        start using the platform.
       </div>
       <div className="homepage-info">
         {numberOfMintedTokens ? (
@@ -96,9 +93,9 @@ export default function HomePage() {
             onClick={() =>
               window.open(
                 "https://" +
-                  NETWORK_NAME +
+                  getDesiredNetworkName() +
                   ".etherscan.io/address/" +
-                  CONTACT_ADDRESS,
+                  getContractAddress(),
                 "_blank"
               )
             }

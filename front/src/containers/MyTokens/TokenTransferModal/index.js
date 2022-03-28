@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import Web3 from "web3";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Modal from "../../../components/Modal";
 import { extractErrorMessage } from "../../../helpers/errors";
-import { retrieveWalletAddress } from "../../../helpers/connect";
-import { CONTACT_ABI, CONTACT_ADDRESS, NETWORK } from "../../../config";
+import { retrieveWalletAddress, getContract } from "../../../helpers/connect";
 import "./style.css";
 
 export default function TokenTransferModal({
@@ -22,8 +20,7 @@ export default function TokenTransferModal({
   useEffect(() => {
     const load = async () => {
       let account = retrieveWalletAddress();
-      const web3 = new Web3(Web3.givenProvider || NETWORK);
-      const cappuContract = new web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+      const cappuContract = await getContract();
       setContract(cappuContract);
       setAccount(account);
     };

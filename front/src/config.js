@@ -1,5 +1,5 @@
 // For development with Ganache.
-// export const NETWORK_NAME = "Local";
+// export const NETWORK_NAME = "private";
 // export const NETWORK = "http://localhost:7545";
 // export const CONTACT_ADDRESS = "0x3Ce1aA8c110a74810Db3CCC4A7D8aE97ae9F907C";
 
