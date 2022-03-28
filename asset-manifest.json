@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/cappu/static/css/main.143ab52f.chunk.css",
-    "main.js": "/cappu/static/js/main.d74b69a4.chunk.js",
-    "main.js.map": "/cappu/static/js/main.d74b69a4.chunk.js.map",
+    "main.js": "/cappu/static/js/main.750e83e4.chunk.js",
+    "main.js.map": "/cappu/static/js/main.750e83e4.chunk.js.map",
     "runtime-main.js": "/cappu/static/js/runtime-main.d1396e48.js",
     "runtime-main.js.map": "/cappu/static/js/runtime-main.d1396e48.js.map",
     "static/css/2.fc5ef72a.chunk.css": "/cappu/static/css/2.fc5ef72a.chunk.css",
-    "static/js/2.25a539ff.chunk.js": "/cappu/static/js/2.25a539ff.chunk.js",
-    "static/js/2.25a539ff.chunk.js.map": "/cappu/static/js/2.25a539ff.chunk.js.map",
+    "static/js/2.50c4c51a.chunk.js": "/cappu/static/js/2.50c4c51a.chunk.js",
+    "static/js/2.50c4c51a.chunk.js.map": "/cappu/static/js/2.50c4c51a.chunk.js.map",
     "index.html": "/cappu/index.html",
     "static/css/2.fc5ef72a.chunk.css.map": "/cappu/static/css/2.fc5ef72a.chunk.css.map",
     "static/css/main.143ab52f.chunk.css.map": "/cappu/static/css/main.143ab52f.chunk.css.map",
-    "static/js/2.25a539ff.chunk.js.LICENSE.txt": "/cappu/static/js/2.25a539ff.chunk.js.LICENSE.txt",
+    "static/js/2.50c4c51a.chunk.js.LICENSE.txt": "/cappu/static/js/2.50c4c51a.chunk.js.LICENSE.txt",
     "static/media/300.css": "/cappu/static/media/roboto-vietnamese-300-normal.af9afdc1.woff2",
     "static/media/400.css": "/cappu/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2",
     "static/media/500.css": "/cappu/static/media/roboto-vietnamese-500-normal.b8e494da.woff2",
@@ -20,8 +20,8 @@
   "entrypoints": [
     "static/js/runtime-main.d1396e48.js",
     "static/css/2.fc5ef72a.chunk.css",
-    "static/js/2.25a539ff.chunk.js",
+    "static/js/2.50c4c51a.chunk.js",
     "static/css/main.143ab52f.chunk.css",
-    "static/js/main.d74b69a4.chunk.js"
+    "static/js/main.750e83e4.chunk.js"
   ]
 }
