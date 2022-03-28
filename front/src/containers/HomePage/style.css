@@ -4,4 +4,30 @@
 
 .homepage-info {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.homepage-info-item{
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.homepage-info-item-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.homepage-info-item-value {
+  text-align: center;
+}
+
+.homepage-actions-button-group {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.homepage-actions-button {
+  width: 50%;
 }

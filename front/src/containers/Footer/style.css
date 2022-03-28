@@ -1,3 +1,13 @@
 .footer-copyright {
   color: #fff;
 }
+
+.MuiToolbar-root {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.MuiSvgIcon-root {
+  margin-right: 10px;
+  cursor: pointer;
+}

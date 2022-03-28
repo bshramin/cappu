@@ -22,28 +22,30 @@ const Footer = () => {
           <Typography className="footer-copyright">
             Cappu, The NFT Platform.
           </Typography>
+          <div>
+            <GitHub
+              onClick={() =>
+                window.open("https://github.com/bshramin/cappu", "_blank")
+              }
+              fontSize="large"
+              color="background"
+            />
 
-          <GitHub
-            onClick={() =>
-              window.open("https://github.com/bshramin/cappu", "_blank")
-            }
-            fontSize="large"
-            color="background"
-          />
-
-          <TravelExplore
-            onClick={() =>
-              window.open(
-                "https://" +
-                  getDesiredNetworkName() +
-                  ".etherscan.io/address/" +
-                  getContractAddress(),
-                "_blank"
-              )
-            }
-            fontSize="large"
-            color="background"
-          />
+            <TravelExplore
+              alt="View on Etherscan"
+              onClick={() =>
+                window.open(
+                  "https://" +
+                    getDesiredNetworkName() +
+                    ".etherscan.io/address/" +
+                    getContractAddress(),
+                  "_blank"
+                )
+              }
+              fontSize="large"
+              color="background"
+            />
+          </div>
         </Toolbar>
       </Container>
     </AppBar>

@@ -50,12 +50,15 @@ export default function TokenTransferModal({
     <Modal show={show} onClose={onClose}>
       <div className="transfer-token-container">
         <Input
+          className="transfer-token-input"
           placeholder="Destination address..."
           onChange={(e) => {
             setDestination(e.target.value);
           }}
         />
-        <Button onClick={sendToken}>Send Token</Button>
+        <Button className="transfer-token-btn" onClick={sendToken}>
+          Send Token
+        </Button>
       </div>
     </Modal>
   );

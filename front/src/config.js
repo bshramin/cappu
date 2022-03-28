@@ -1,4 +1,6 @@
 // For development with Ganache.
+// export const DAPP_URL = "localhost:3000";
+// export const METAMASK_DEEPLINK_PREFIX = "https://metamask.app.link/dapp/";
 // export const NETWORK_NAME = "private";
 // export const NETWORK = "http://localhost:7545";
 // export const CONTACT_ADDRESS = "0x3Ce1aA8c110a74810Db3CCC4A7D8aE97ae9F907C";

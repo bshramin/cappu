@@ -1,0 +1,12 @@
+.transfer-token-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.transfer-token-input{
+  width: 70%;
+}
+
+.transfer-token-btn {
+  width: 30%;
+}

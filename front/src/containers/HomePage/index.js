@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import GitHub from "@mui/icons-material/GitHub";
-import TravelExplore from "@mui/icons-material/TravelExplore";
 import {
   getContract,
   getContractAddress,
@@ -70,7 +68,7 @@ export default function HomePage() {
         {numberOfTokenHolders ? (
           <div className="homepage-info-item">
             <div className="homepage-info-item-title">
-              Current Number of Token Holders
+              Number of Token Holders
             </div>
             <div className="homepage-info-item-value">
               {numberOfTokenHolders}
@@ -81,11 +79,15 @@ export default function HomePage() {
 
       <div className="homepage-actions">
         <ButtonGroup
+          className="homepage-actions-button-group"
           variant="contained"
           aria-label="outlined primary button group"
         >
-          <Button onClick={connectWallet}>Connect Metamask Extension</Button>
+          <Button className="homepage-actions-button" onClick={connectWallet}>
+            Connect Metamask Extension
+          </Button>
           <Button
+            className="homepage-actions-button"
             onClick={() => window.open(METAMASK_DEEPLINK_PREFIX + DAPP_URL)}
           >
             Open in Metamask Browser
