@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -21,6 +21,7 @@ import {
 import "./style.css";
 
 const Header = () => {
+  let navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -124,15 +125,19 @@ const Header = () => {
               >
                 {pages.map((page) =>
                   page.noLogin || isLoggedIn ? (
-                    <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                      <Link to={page.url}>
-                        <Typography
-                          textAlign="center"
-                          className="header-nav-link-mobile"
-                        >
-                          {page.title}
-                        </Typography>
-                      </Link>
+                    <MenuItem
+                      key={page.title}
+                      onClick={(e) => {
+                        handleCloseNavMenu(e);
+                        navigate(page.url);
+                      }}
+                    >
+                      <Typography
+                        textAlign="center"
+                        className="header-nav-link-mobile"
+                      >
+                        {page.title}
+                      </Typography>
                     </MenuItem>
                   ) : null
                 )}
