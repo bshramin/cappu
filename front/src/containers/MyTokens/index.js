@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,6 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
 import TokenTransferModal from "./TokenTransferModal";
 import ResultModal from "../../components/ResultModal";
 import {
@@ -70,7 +73,14 @@ export default function MyTokens() {
           return <span>Failed to load tokens</span>;
         }
         if (tokensId.length === 0 || tokensData === 0) {
-          return <span>You have no tokens yet</span>;
+          return (
+            <>
+              <span>You have no tokens yet</span>
+              <Link to="/mint" className="mint-token-link">
+                <Button>Mint a Token</Button>
+              </Link>
+            </>
+          );
         }
         return (
           <TableContainer component={Paper}>
