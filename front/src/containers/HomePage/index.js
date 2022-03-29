@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import ConnectWallet from "../../components/ConnectWallet";
 import {
@@ -11,6 +12,8 @@ import {
 import "./style.css";
 
 export default function HomePage() {
+  const [numOfTokensIsLoading, setNumOfTokensIsLoading] = useState(true);
+  const [numOfHoldersIsLoading, setNumOfHoldersIsLoading] = useState(true);
   const [numberOfTokenHolders, setNumberOfTokenHolders] = useState();
   const [numberOfMintedTokens, setNumberOfMintedTokens] = useState();
 
@@ -26,11 +29,15 @@ export default function HomePage() {
       .then(setNumberOfTokenHolders)
       .catch(console.error);
 
+    setNumOfHoldersIsLoading(false);
+
     cappuContract.methods
       .getNumberOfMintedTokens()
       .call()
       .then(setNumberOfMintedTokens)
       .catch(console.error);
+
+    setNumOfTokensIsLoading(false);
   };
 
   return (
@@ -54,26 +61,27 @@ export default function HomePage() {
         start using the platform.
       </div>
       <div className="homepage-info">
-        {numberOfMintedTokens ? (
-          <div className="homepage-info-item">
-            <div className="homepage-info-item-title">
-              Number of Minted Tokens
-            </div>
-            <div className="homepage-info-item-value">
-              {numberOfMintedTokens}
-            </div>
+        <div className="homepage-info-item">
+          <div className="homepage-info-item-title">
+            Number of Minted Tokens
           </div>
-        ) : null}
-        {numberOfTokenHolders ? (
-          <div className="homepage-info-item">
-            <div className="homepage-info-item-title">
-              Number of Token Holders
-            </div>
-            <div className="homepage-info-item-value">
-              {numberOfTokenHolders}
-            </div>
+          <div className="homepage-info-item-value">
+            {numOfTokensIsLoading ? <CircularProgress /> : numberOfMintedTokens}
           </div>
-        ) : null}
+        </div>
+
+        <div className="homepage-info-item">
+          <div className="homepage-info-item-title">
+            Number of Token Holders
+          </div>
+          <div className="homepage-info-item-value">
+            {numOfHoldersIsLoading ? (
+              <CircularProgress />
+            ) : (
+              numberOfTokenHolders
+            )}
+          </div>
+        </div>
       </div>
 
       {isWalletConnected() ? null : <ConnectWallet />}

@@ -9,6 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import TokenTransferModal from "./TokenTransferModal";
 import ResultModal from "../../components/ResultModal";
@@ -22,6 +23,7 @@ import {
 import "./style.css";
 
 export default function MyTokens() {
+  const [progress, setProgress] = useState(0);
   const [account, setAccount] = useState();
   const [networkName, setNetworkName] = useState();
   const [tokensId, setTokensId] = useState();
@@ -39,24 +41,31 @@ export default function MyTokens() {
     setAccount(account);
     if (account) {
       const cappuContract = await getContract();
+      setProgress(25);
       const netName = await getWalletNetworkName();
+      setProgress(50);
       if (netName !== getDesiredNetworkName()) {
         console.info("Wrong network!");
         return;
       }
 
       const output = await cappuContract.methods.getUserTokens(account).call();
+      setProgress(75);
       const id = output[0];
       const data = output[1];
       setNetworkName(netName);
       setTokensId(id);
       setTokensData(data);
+      setProgress(100);
     }
   };
 
   return (
     <div className="my-tokens-container">
       {(() => {
+        if (progress !== 100) {
+          return <CircularProgress variant="determinate" value={progress} />;
+        }
         if (!account) {
           return (
             <>

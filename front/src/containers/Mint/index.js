@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   retrieveWalletAddress,
   getContract,
@@ -13,6 +14,7 @@ import { extractErrorMessage } from "../../helpers/errors";
 import "./style.css";
 
 function Mint() {
+  const [progress, setProgress] = useState(0);
   const [account, setAccount] = useState();
   const [networkName, setNetworkName] = useState();
   const [contract, setContract] = useState();
@@ -23,10 +25,13 @@ function Mint() {
   useEffect(() => {
     const load = async () => {
       setAccount(retrieveWalletAddress());
+      setProgress(33);
       const cappuContract = await getContract();
       setContract(cappuContract);
+      setProgress(66);
       const netName = await getWalletNetworkName();
       setNetworkName(netName);
+      setProgress(100);
     };
 
     load();
@@ -49,6 +54,9 @@ function Mint() {
   return (
     <div className="mint-container">
       {(() => {
+        if (progress !== 100) {
+          return <CircularProgress variant="determinate" value={progress} />;
+        }
         if (!account) {
           return (
             <>
