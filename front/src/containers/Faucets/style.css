@@ -1,0 +1,8 @@
+.faucets-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.faucets-btn {
+  margin-bottom: 10px !important;
+}

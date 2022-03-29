@@ -2,6 +2,11 @@
   word-break: break-all;
 }
 
+.homepage-description-link {
+  cursor: pointer;
+  color: blue;
+}
+
 .homepage-info {
   margin-top: 30px;
   display: flex;

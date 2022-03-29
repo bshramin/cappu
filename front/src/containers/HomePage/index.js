@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import CircularProgress from "@mui/material/CircularProgress";
 
 import ConnectWallet from "../../components/ConnectWallet";
@@ -13,6 +15,7 @@ import { timeoutPromise } from "../../helpers/timeout";
 import "./style.css";
 
 export default function HomePage() {
+  let navigate = useNavigate();
   const [numOfTokensIsLoading, setNumOfTokensIsLoading] = useState(true);
   const [numOfHoldersIsLoading, setNumOfHoldersIsLoading] = useState(true);
   const [numberOfTokenHolders, setNumberOfTokenHolders] = useState();
@@ -56,6 +59,22 @@ export default function HomePage() {
         You need to have the Metamask extention installed and choose the{" "}
         {getDesiredNetworkName()} network, then you can connect your wallet and
         start using the platform.
+        {isWalletConnected() ? (
+          <>
+            <br />
+            <br />
+            You can get some testnet network tokens from the
+            <span
+              className="homepage-description-link"
+              onClick={() => {
+                navigate("/faucets");
+              }}
+            >
+              {" "}
+              faucets page.
+            </span>
+          </>
+        ) : null}
       </div>
       <div className="homepage-info">
         <div className="homepage-info-item">

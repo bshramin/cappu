@@ -43,6 +43,7 @@ const Header = () => {
   const pages = [
     { title: "Mint", url: "/mint", noLogin: false },
     { title: "My Tokens", url: "/my-tokens", noLogin: false },
+    { title: "Faucets", url: "/faucets", noLogin: false },
   ];
 
   const settings = [

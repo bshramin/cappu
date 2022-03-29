@@ -7,6 +7,7 @@ import Mint from "./containers/Mint";
 import HomePage from "./containers/HomePage";
 import Header from "./containers/Header";
 import Footer from "./containers/Footer";
+import Faucets from "./containers/Faucets";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -43,6 +44,7 @@ ReactDOM.render(
           <Route path="/" element={<HomePage />} />
           <Route path="my-tokens" element={<MyTokens />} />
           <Route path="mint" element={<Mint />} />
+          <Route path="faucets" element={<Faucets />} />
         </Routes>
       </div>
       <Footer />
