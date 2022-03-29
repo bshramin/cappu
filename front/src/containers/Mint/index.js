@@ -113,7 +113,9 @@ function Mint() {
       >
         {mintLoading ? (
           <div className="modal-pending-child">
-            <Typography variant="h6">Minting...</Typography>
+            <Typography variant="h6">
+              Minting, This Can Take a While...
+            </Typography>
             <CircularProgress sx={{ marginTop: "10px" }} />
           </div>
         ) : (

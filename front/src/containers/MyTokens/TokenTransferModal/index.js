@@ -60,7 +60,19 @@ export default function TokenTransferModal({ show, tokenId, onClose }) {
     >
       {(() => {
         if (transferLoading) {
-          return <CircularProgress />;
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <span>Transfering, This Can Take a While...</span>
+              <CircularProgress style={{ marginTop: "10px" }} />
+            </div>
+          );
         }
         if (transferError) {
           return (

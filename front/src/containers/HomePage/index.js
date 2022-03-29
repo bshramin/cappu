@@ -11,7 +11,6 @@ import {
   getDesiredNetworkName,
   isWalletConnected,
 } from "../../helpers/connect";
-import { timeoutPromise } from "../../helpers/timeout";
 import "./style.css";
 
 export default function HomePage() {
@@ -27,17 +26,19 @@ export default function HomePage() {
 
   const load = async () => {
     const cappuContract = await getContract();
-    timeoutPromise(cappuContract.methods.getNumberOfTokenHolders().call(), 1000)
+    cappuContract.methods
+      .getNumberOfTokenHolders()
+      .call()
       .then(setNumberOfTokenHolders)
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setNumOfHoldersIsLoading(false));
 
-    setNumOfHoldersIsLoading(false);
-
-    timeoutPromise(cappuContract.methods.getNumberOfMintedTokens().call(), 1000)
+    cappuContract.methods
+      .getNumberOfMintedTokens()
+      .call()
       .then(setNumberOfMintedTokens)
-      .catch(console.error);
-
-    setNumOfTokensIsLoading(false);
+      .catch(console.error)
+      .finally(() => setNumOfTokensIsLoading(false));
   };
 
   return (
