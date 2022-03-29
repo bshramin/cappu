@@ -16,7 +16,7 @@ import "./style.css";
 
 const Footer = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="footer-container">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography className="footer-copyright">

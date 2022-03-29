@@ -11,3 +11,8 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
+.footer-container {
+  position: absolute !important;
+  top: calc(100% - 64px);
+}
