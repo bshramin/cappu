@@ -1,10 +1,9 @@
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import { connectWallet, isWalletConnected } from "../../helpers/connect";
+import { connectWallet } from "../../helpers/connect";
 import { DAPP_URL, METAMASK_DEEPLINK_PREFIX } from "../../config.js";
 
 import "./style.css";
-import { AssignmentReturned } from "@mui/icons-material";
 
 export default function ConnectWallet() {
   return (

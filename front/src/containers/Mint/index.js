@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
-import Box from "@mui/system/Box";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
@@ -17,7 +16,7 @@ import "./style.css";
 
 function Mint() {
   const [mintLoading, setMintLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [pageLoading, setPageLoading] = useState(true);
   const [account, setAccount] = useState();
   const [networkName, setNetworkName] = useState();
   const [contract, setContract] = useState();
@@ -28,13 +27,11 @@ function Mint() {
   useEffect(() => {
     const load = async () => {
       setAccount(retrieveWalletAddress());
-      setProgress(33);
       const cappuContract = await getContract();
       setContract(cappuContract);
-      setProgress(66);
       const netName = await getWalletNetworkName();
       setNetworkName(netName);
-      setProgress(100);
+      setPageLoading(false);
     };
 
     load();
@@ -62,8 +59,8 @@ function Mint() {
   return (
     <div className="mint-container">
       {(() => {
-        if (progress !== 100) {
-          return <CircularProgress variant="determinate" value={progress} />;
+        if (pageLoading) {
+          return <CircularProgress />;
         }
         if (!account) {
           return (
@@ -96,28 +93,14 @@ function Mint() {
               onChange={(e) => setData(e.target.value)}
               disabled={mintLoading}
             />
-            <Box sx={{ m: 1, position: "relative" }}>
-              <Button
-                variant="contained"
-                className="mint-submit"
-                onClick={mintToken}
-                disabled={mintLoading}
-              >
-                Mint
-              </Button>
-              {mintLoading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: "secondary",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginLeft: "-12px",
-                  }}
-                />
-              )}
-            </Box>
+            <Button
+              variant="contained"
+              className="mint-submit"
+              onClick={mintToken}
+              disabled={mintLoading}
+            >
+              Mint
+            </Button>
           </>
         );
       })()}
