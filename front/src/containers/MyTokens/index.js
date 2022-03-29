@@ -12,7 +12,6 @@ import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import TokenTransferModal from "./TokenTransferModal";
-import ResultModal from "../../components/ResultModal";
 import ConnectWallet from "../../components/ConnectWallet";
 import {
   retrieveWalletAddress,
@@ -29,8 +28,6 @@ export default function MyTokens() {
   const [tokensId, setTokensId] = useState();
   const [tokensData, setTokensData] = useState();
   const [tokenIdToTransfer, setTokenIdToTransfer] = useState(null);
-  const [resultModalMsg, setResultModalMsg] = useState(null);
-  const [resultModalColor, setResultModalColor] = useState(null);
 
   useEffect(() => {
     load();
@@ -56,8 +53,8 @@ export default function MyTokens() {
       setNetworkName(netName);
       setTokensId(id);
       setTokensData(data);
-      setProgress(100);
     }
+    setProgress(100);
   };
 
   return (
@@ -146,34 +143,18 @@ export default function MyTokens() {
         );
       })()}
 
-      <TokenTransferModal
-        show={!!tokenIdToTransfer}
-        tokenId={tokenIdToTransfer}
-        onError={(errMsg) => {
-          setResultModalMsg(errMsg);
-          setResultModalColor("red");
-          setTokenIdToTransfer(null);
-        }}
-        onSuccess={() => {
-          setResultModalMsg("Token transferred successfully");
-          setResultModalColor("green");
-          setTokenIdToTransfer(null);
-          load();
-        }}
-        onClose={() => {
-          setTokenIdToTransfer(null);
-        }}
-      />
-      <ResultModal
-        show={!!resultModalMsg}
-        onClose={() => {
-          setTokenIdToTransfer(null);
-          setResultModalMsg(null);
-          setResultModalColor(null);
-        }}
-        color={resultModalColor}
-        text={resultModalMsg}
-      />
+      {tokenIdToTransfer ? (
+        <TokenTransferModal
+          show={!!tokenIdToTransfer}
+          tokenId={tokenIdToTransfer}
+          onClose={(shouldLoad) => {
+            setTokenIdToTransfer(null);
+            if (shouldLoad) {
+              load();
+            }
+          }}
+        />
+      ) : null}
     </div>
   );
 }

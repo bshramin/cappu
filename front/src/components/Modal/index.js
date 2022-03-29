@@ -15,6 +15,9 @@ const modalStyle = {
   borderRadius: "8px",
   boxShadow: 24,
   p: 4,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export default function TokenTransfer({ children, show, onClose }) {
