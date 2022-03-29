@@ -5,6 +5,8 @@
 .MuiToolbar-root {
   display: flex !important;
   justify-content: space-between;
+  align-items: center;
+  height: 64px !important;
 }
 
 .MuiSvgIcon-root {
@@ -13,6 +15,6 @@
 }
 
 .footer-container {
-  position: absolute !important;
+  position: fixed !important;
   top: calc(100% - 64px);
 }

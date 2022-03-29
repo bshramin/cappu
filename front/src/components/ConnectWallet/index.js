@@ -4,9 +4,10 @@ import { connectWallet, isWalletConnected } from "../../helpers/connect";
 import { DAPP_URL, METAMASK_DEEPLINK_PREFIX } from "../../config.js";
 
 import "./style.css";
+import { AssignmentReturned } from "@mui/icons-material";
 
 export default function ConnectWallet() {
-  return isWalletConnected() ? null : (
+  return (
     <ButtonGroup
       className="connect-wallet-button-group"
       variant="contained"

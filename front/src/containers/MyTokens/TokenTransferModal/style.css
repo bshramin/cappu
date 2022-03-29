@@ -13,4 +13,5 @@
 .transfer-token-btn {
   margin-top: 20px !important;
   width: 30%;
+  min-width: 120px !important;
 }

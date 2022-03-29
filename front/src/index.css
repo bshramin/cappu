@@ -13,5 +13,10 @@ code {
 }
 
 .main-section {
-  margin: 30px 10% ;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 30px 5% 84px 5%;
+  width: 90%;
+  max-width: 724px;
 }

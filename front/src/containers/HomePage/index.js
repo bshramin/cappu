@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import ConnectWallet from "../../components/ConnectWallet";
+import CappuActions from "../../components/CappuActions";
 import {
   getContract,
   getContractAddress,
@@ -62,18 +63,14 @@ export default function HomePage() {
       </div>
       <div className="homepage-info">
         <div className="homepage-info-item">
-          <div className="homepage-info-item-title">
-            Number of Minted Tokens
-          </div>
+          <div className="homepage-info-item-title">Number of Tokens</div>
           <div className="homepage-info-item-value">
             {numOfTokensIsLoading ? <CircularProgress /> : numberOfMintedTokens}
           </div>
         </div>
 
         <div className="homepage-info-item">
-          <div className="homepage-info-item-title">
-            Number of Token Holders
-          </div>
+          <div className="homepage-info-item-title">Number of Holders</div>
           <div className="homepage-info-item-value">
             {numOfHoldersIsLoading ? (
               <CircularProgress />
@@ -84,7 +81,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {isWalletConnected() ? null : <ConnectWallet />}
+      {isWalletConnected() ? <CappuActions /> : <ConnectWallet />}
     </div>
   );
 }
