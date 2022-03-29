@@ -8,6 +8,7 @@ import {
   getDesiredNetworkName,
 } from "../../helpers/connect";
 import ResultModal from "../../components/ResultModal";
+import ConnectWallet from "../../components/ConnectWallet";
 import { extractErrorMessage } from "../../helpers/errors";
 import "./style.css";
 
@@ -49,7 +50,15 @@ function Mint() {
     <div className="mint-container">
       {(() => {
         if (!account) {
-          return <span>Connect your wallet</span>;
+          return (
+            <>
+              <span>
+                Connect your Metamask wallet or open Cappu in the Metamask
+                browser
+              </span>
+              <ConnectWallet />
+            </>
+          );
         }
         if (networkName !== getDesiredNetworkName()) {
           return (

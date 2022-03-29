@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 
 import TokenTransferModal from "./TokenTransferModal";
 import ResultModal from "../../components/ResultModal";
+import ConnectWallet from "../../components/ConnectWallet";
 import {
   retrieveWalletAddress,
   getContract,
@@ -57,7 +58,15 @@ export default function MyTokens() {
     <div className="my-tokens-container">
       {(() => {
         if (!account) {
-          return <span>Connect your wallet</span>;
+          return (
+            <>
+              <span>
+                Connect your Metamask wallet or open Cappu in the Metamask
+                browser
+              </span>
+              <ConnectWallet />
+            </>
+          );
         }
         if (networkName !== getDesiredNetworkName()) {
           return (
@@ -77,7 +86,7 @@ export default function MyTokens() {
             <>
               <span>You have no tokens yet</span>
               <Link to="/mint" className="mint-token-link">
-                <Button>Mint a Token</Button>
+                <Button variant="contained">Mint a Token</Button>
               </Link>
             </>
           );

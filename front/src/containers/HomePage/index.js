@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+
+import ConnectWallet from "../../components/ConnectWallet";
 import {
   getContract,
   getContractAddress,
   getDesiredNetworkName,
-  connectWallet,
+  isWalletConnected,
 } from "../../helpers/connect";
-import { DAPP_URL, METAMASK_DEEPLINK_PREFIX } from "../../config.js";
 
 import "./style.css";
 
@@ -77,23 +76,7 @@ export default function HomePage() {
         ) : null}
       </div>
 
-      <div className="homepage-actions">
-        <ButtonGroup
-          className="homepage-actions-button-group"
-          variant="contained"
-          aria-label="outlined primary button group"
-        >
-          <Button className="homepage-actions-button" onClick={connectWallet}>
-            Connect Metamask Extension
-          </Button>
-          <Button
-            className="homepage-actions-button"
-            onClick={() => window.open(METAMASK_DEEPLINK_PREFIX + DAPP_URL)}
-          >
-            Open in Metamask Browser
-          </Button>
-        </ButtonGroup>
-      </div>
+      {isWalletConnected() ? null : <ConnectWallet />}
     </div>
   );
 }
